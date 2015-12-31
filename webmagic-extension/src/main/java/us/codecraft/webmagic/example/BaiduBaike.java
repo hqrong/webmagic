@@ -11,7 +11,7 @@ import java.util.List;
  * @since 0.4.0
  * @author code4crafter@gmail.com
  */
-public class BaiduBaike{
+public class BaiduBaike {
 
     @ExtractBy("//h1[@class=title]/div[@class=lemmaTitleH1]/text()")
     private String name;

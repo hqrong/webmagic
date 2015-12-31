@@ -2,8 +2,10 @@ package us.codecraft.webmagic;
 
 import org.junit.Ignore;
 import org.junit.Test;
+
 import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.processor.SimplePageProcessor;
+import us.codecraft.webmagic.processor.example.BaiduBaikePageProcessor;
 import us.codecraft.webmagic.samples.HuxiuProcessor;
 import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 
@@ -15,10 +17,9 @@ import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 public class SpiderTest {
 
 
-    @Ignore
     @Test
     public void testSpider() throws InterruptedException {
-        Spider me = Spider.create(new HuxiuProcessor()).pipeline(new FilePipeline());
+        Spider me = Spider.create(new BaiduBaikePageProcessor());//.pipeline(new FilePipeline("/Users/rplees/Desktop/temp/web/"));
         me.run();
     }
 
@@ -31,7 +32,7 @@ public class SpiderTest {
         SimplePageProcessor pageProcessor2 = new SimplePageProcessor("http://www.diaoyuweng.com/home.php?mod=space&uid=88304&do=thread&view=me&type=thread&from=space", "http://www.diaoyuweng.com/thread-*-1-1.html");
         System.out.println(pageProcessor2.getSite().getCharset());
         pageProcessor2.getSite().setSleepTime(500);
-        Spider.create(pageProcessor2).pipeline(new FilePipeline()).scheduler(new FileCacheQueueScheduler("/data/temp/webmagic/cache/")).
+        Spider.create(pageProcessor2).pipeline(new FilePipeline("/Users/rplees/Desktop/temp/web/")).scheduler(new FileCacheQueueScheduler("/Users/rplees/Desktop/temp/cache/")).
                 run();
 
 

@@ -27,6 +27,7 @@ public class QueueScheduler extends DuplicateRemovedScheduler implements Monitor
 
     @Override
     public synchronized Request poll(Task task) {
+    	logger.info("QueueScheduler还有队列数量:" + queue.size());
         return queue.poll();
     }
 

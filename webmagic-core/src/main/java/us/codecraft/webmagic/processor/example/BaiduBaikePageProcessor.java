@@ -15,13 +15,13 @@ import java.util.List;
  */
 public class BaiduBaikePageProcessor implements PageProcessor {
 
-    private Site site = Site.me()//.setHttpProxy(new HttpHost("127.0.0.1",8888))
+    private Site site = Site.me().setDomain("baike.baidu.com").addStartUrl("http://baike.baidu.com/search/word?word=水力发电&pic=1&sug=1&enc=utf8")//.setHttpProxy(new HttpHost("127.0.0.1",8888))
             .setRetryTimes(3).setSleepTime(1000).setUseGzip(true);
 
     @Override
     public void process(Page page) {
-        page.putField("name", page.getHtml().css("h1.title div.lemmaTitleH1","text").toString());
-        page.putField("description", page.getHtml().xpath("//div[@id='lemmaContent-0']//div[@class='para']/allText()"));
+        page.putField("name", page.getHtml().xpath("//html/body[@class='wiki-lemma normal']/div[@class='body-wrapper']/div[@class='content-wrapper']/div[@class='content']/div[@class='main-content']/dl[@class='lemmaWgt-lemmaTitle lemmaWgt-lemmaTitle-']/dd[@class='lemmaWgt-lemmaTitle-title']/h1/text()").toString());
+        page.putField("description", page.getHtml().xpath("//html/body[@class='wiki-lemma normal']/div[@class='body-wrapper']/div[@class='content-wrapper']/div[@class='content']/div[@class='main-content']/div[@class='lemma-summary']/div[@class='para']/text()"));
     }
 
     @Override
