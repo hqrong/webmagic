@@ -1,19 +1,28 @@
 package us.codecraft.webmagic.monitor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import us.codecraft.webmagic.Request;
-import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.SpiderListener;
-import us.codecraft.webmagic.utils.Experimental;
-
-import javax.management.*;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.JMException;
+import javax.management.MBeanRegistrationException;
+import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
+import javax.management.ObjectName;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import us.codecraft.webmagic.Request;
+import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.SpiderListener;
+import us.codecraft.webmagic.utils.Experimental;
 
 /**
  * @author code4crafer@gmail.com
@@ -69,7 +78,23 @@ public class SpiderMonitor {
     public static SpiderMonitor instance() {
         return INSTANCE;
     }
-
+    
+    public List<SpiderStatusMXBean> getSpiderStatusMXBeans() {
+    	return spiderStatuses;
+    }
+    
+    public SpiderStatusMXBean getSpiderStatusMXBean(String spiderUUID) {
+    	if(StringUtils.isBlank(spiderUUID))
+    		return null;
+    	for (SpiderStatusMXBean spiderStatusMXBean : spiderStatuses) {
+			if(spiderUUID.equals(spiderStatusMXBean.getName())) {
+				return spiderStatusMXBean;
+			}
+		}
+    	
+    	return null;
+    }
+    
     public class MonitorSpiderListener implements SpiderListener {
 
         private final AtomicInteger successCount = new AtomicInteger(0);

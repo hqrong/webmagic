@@ -2,7 +2,9 @@ package us.codecraft.webmagic.monitor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.Spider.Status;
 import us.codecraft.webmagic.scheduler.MonitorableScheduler;
 
 import java.util.Date;
@@ -65,6 +67,11 @@ public class SpiderStatus implements SpiderStatusMXBean {
     }
 
     @Override
+	public Status getStatusEnum() {
+		return spider.getStatus();
+	}
+    
+    @Override
     public int getThread() {
         return spider.getThreadAlive();
     }
@@ -87,5 +94,4 @@ public class SpiderStatus implements SpiderStatusMXBean {
         int runSeconds = (int) (System.currentTimeMillis() - getStartTime().getTime()) / 1000;
         return getSuccessPageCount() / runSeconds;
     }
-
 }

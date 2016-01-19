@@ -3,6 +3,8 @@ package us.codecraft.webmagic.monitor;
 import java.util.Date;
 import java.util.List;
 
+import us.codecraft.webmagic.Spider.Status;
+
 /**
  * @author code4crafer@gmail.com
  * @since 0.5.0
@@ -12,6 +14,8 @@ public interface SpiderStatusMXBean {
     public String getName();
 
     public String getStatus();
+    
+    public Status getStatusEnum();
 
     public int getThread();
 

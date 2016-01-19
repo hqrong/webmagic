@@ -21,6 +21,6 @@ public class MonitorExample {
         SpiderMonitor.instance().register(oschinaSpider);
         SpiderMonitor.instance().register(githubSpider);
         oschinaSpider.start();
-        githubSpider.start();
+//        githubSpider.start();
     }
 }
