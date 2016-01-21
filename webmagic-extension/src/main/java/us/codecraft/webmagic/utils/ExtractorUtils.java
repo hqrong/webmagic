@@ -36,7 +36,7 @@ public class ExtractorUtils {
         return selector;
     }
 
-    private static Selector getXpathSelector(String value) {
+    public static Selector getXpathSelector(String value) {
         Selector selector = new XpathSelector(value);
         return selector;
     }

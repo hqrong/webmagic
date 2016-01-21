@@ -83,6 +83,20 @@ public class SpiderMonitor {
     	return spiderStatuses;
     }
     
+    public List<String> getSpiderStatusMXBeansWithPrefix(String prefix) {
+    	if(StringUtils.isBlank(prefix))
+    		return null;
+    	
+    	ArrayList<String> list = new ArrayList<String>();
+    	for (SpiderStatusMXBean spiderStatusMXBean : spiderStatuses) {
+			if(StringUtils.startsWith(spiderStatusMXBean.getName(), prefix)) {
+				list.add(spiderStatusMXBean.getName());
+			}
+		}
+    	
+    	return list;
+    }
+    
     public SpiderStatusMXBean getSpiderStatusMXBean(String spiderUUID) {
     	if(StringUtils.isBlank(spiderUUID))
     		return null;

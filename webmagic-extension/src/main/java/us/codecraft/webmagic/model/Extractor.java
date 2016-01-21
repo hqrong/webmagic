@@ -7,17 +7,17 @@ import us.codecraft.webmagic.selector.Selector;
  * @author code4crafter@gmail.com <br>
  * @since 0.2.0
  */
-class Extractor {
+public class Extractor {
 
     protected Selector selector;
 
-    protected final Source source;
+    protected Source source;
 
-    protected final boolean notNull;
+    protected boolean notNull;
 
-    protected final boolean multi;
+    protected boolean multi;
 
-    static enum Source {Html, Url, RawHtml}
+    public static enum Source {Html, Url, RawHtml}
 
     public Extractor(Selector selector, Source source, boolean notNull, boolean multi) {
         this.selector = selector;
@@ -26,23 +26,23 @@ class Extractor {
         this.multi = multi;
     }
 
-    Selector getSelector() {
+    public Selector getSelector() {
         return selector;
     }
 
-    Source getSource() {
+    public Source getSource() {
         return source;
     }
 
-    boolean isNotNull() {
+    public boolean isNotNull() {
         return notNull;
     }
 
-    boolean isMulti() {
+    public boolean isMulti() {
         return multi;
     }
 
-    void setSelector(Selector selector) {
+    public void setSelector(Selector selector) {
         this.selector = selector;
     }
 }

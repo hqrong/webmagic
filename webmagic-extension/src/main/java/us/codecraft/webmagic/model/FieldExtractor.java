@@ -1,23 +1,23 @@
 package us.codecraft.webmagic.model;
 
-import us.codecraft.webmagic.model.formatter.ObjectFormatter;
-import us.codecraft.webmagic.selector.Selector;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import us.codecraft.webmagic.model.formatter.ObjectFormatter;
+import us.codecraft.webmagic.selector.Selector;
 
 /**
  * Wrapper of field and extractor.
  * @author code4crafter@gmail.com <br>
  * @since 0.2.0
  */
-class FieldExtractor extends Extractor {
+public class FieldExtractor extends Extractor {
 
     private final Field field;
 
     private Method setterMethod;
 
-    private ObjectFormatter objectFormatter;
+    private ObjectFormatter<?> objectFormatter;
 
     public FieldExtractor(Field field, Selector selector, Source source, boolean notNull, boolean multi) {
         super(selector, source, notNull, multi);
@@ -28,14 +28,6 @@ class FieldExtractor extends Extractor {
         return field;
     }
 
-    Selector getSelector() {
-        return selector;
-    }
-
-    Source getSource() {
-        return source;
-    }
-
     void setSetterMethod(Method setterMethod) {
         this.setterMethod = setterMethod;
     }
@@ -44,15 +36,11 @@ class FieldExtractor extends Extractor {
         return setterMethod;
     }
 
-    boolean isNotNull() {
-        return notNull;
-    }
-
-    ObjectFormatter getObjectFormatter() {
+    ObjectFormatter<?> getObjectFormatter() {
         return objectFormatter;
     }
 
-    void setObjectFormatter(ObjectFormatter objectFormatter) {
+    void setObjectFormatter(ObjectFormatter<?> objectFormatter) {
         this.objectFormatter = objectFormatter;
     }
 }
