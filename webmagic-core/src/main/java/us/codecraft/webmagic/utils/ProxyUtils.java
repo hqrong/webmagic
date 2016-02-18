@@ -97,9 +97,33 @@ public class ProxyUtils {
 		return isReachable;
 	}
 
-	private static String getNetworkInterface() {
+	public static String getNetworkInterface() {
 
 		String networkInterfaceName = ">>>> modify networkInterface in us.codecraft.webmagic.utils.ProxyUtils";
+		Enumeration<NetworkInterface> enumeration = null;
+		try {
+			enumeration = NetworkInterface.getNetworkInterfaces();
+		} catch (SocketException e1) {
+			e1.printStackTrace();
+		}
+		while (enumeration.hasMoreElements()) {
+			NetworkInterface networkInterface = enumeration.nextElement();
+
+			Enumeration<InetAddress> addr = networkInterface.getInetAddresses();
+			while (addr.hasMoreElements()) {
+				String s = addr.nextElement().getHostAddress();
+				Pattern IPV4_PATTERN = Pattern.compile("^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
+				if (s != null && IPV4_PATTERN.matcher(s).matches()) {
+					networkInterfaceName += networkInterface.toString() + "IP:" + s + "\n\n";
+				}
+			}
+		}
+		return networkInterfaceName;
+	}
+	
+	public static String getNetworkInterface2() {
+
+		String networkInterfaceName = "";
 		Enumeration<NetworkInterface> enumeration = null;
 		try {
 			enumeration = NetworkInterface.getNetworkInterfaces();
